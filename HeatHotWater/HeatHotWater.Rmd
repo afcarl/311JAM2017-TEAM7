@@ -7,5 +7,49 @@ output: html_notebook
 ```{r setup}
 options(stringsAsFactors = FALSE)
 library(tidyverse)
+library(lubridate)
+library(ggridges)
+library(ggthemes)
+```
+
+```{r dat}
+dat <- read_csv("hhw.csv")
+glimpse(dat)
+```
+
+Aggregate data found a concerning 2017 trend in the Bronx, so we'll
+dive down.
+
+* Aggregate same-building complaints within the same month.
+* Check for outliers and distribution in resolution time.
+
+```{r clean}
+bx <- dat %>%
+  select(created_date, resolution_action_updated_date, borough, incident_address, 
+         community_board) %>%
+  filter(borough=='BRONX') %>%
+  mutate(close_days=time_length(resolution_action_updated_date - created_date, "day"),
+         created_month = floor_date(created_date, "month"),
+         fiscal_year = year(created_date + months(6))) %>%
+  group_by(incident_address, created_month) %>%
+  mutate(n=n(), rn=row_number()) %>%
+  ungroup()
+
+```
+
+```{r res_time}
+
+actual <- data_frame(fiscal_year=2014:2017,
+                     close_days=c(12, 13, 11, 12))
+bx %>%
+  filter(rn==1, !is.na(fiscal_year)) %>%
+  ggplot(aes(close_days, factor(fiscal_year))) + 
+  geom_density_ridges(scale=2, bandwidth=.5, fill="blue") +
+  scale_x_continuous("Resolution Days", limits=c(0,14), breaks=c(0,7,14)) +
+  ylab("") +
+  ggtitle("Heat & Hot Water 311 Complaints",
+          "Note: Blue = 311 Resolution Time; Red = HPD Resolution Time (MMR)") +
+  theme_hc() +
+  geom_point(data=actual, color="red", size=5)
 
 ```

@@ -44,7 +44,7 @@ actual <- data_frame(fiscal_year=2014:2017,
 bx %>%
   filter(rn==1, !is.na(fiscal_year)) %>%
   ggplot(aes(close_days, factor(fiscal_year))) + 
-  geom_density_ridges(scale=2, bandwidth=.5, fill="blue") +
+  geom_density_ridges(scale=2, bandwidth=.5, fill="lightblue") +
   scale_x_continuous("Resolution Days", limits=c(0,14), breaks=c(0,7,14)) +
   ylab("") +
   ggtitle("Heat & Hot Water 311 Complaints",

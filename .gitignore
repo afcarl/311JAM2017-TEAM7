@@ -1,1 +1,7 @@
 auth_key.json
+.Rproj.user
+.Rhistory
+*.Rproj
+.ipynb_checkpoints
+*.csv
+

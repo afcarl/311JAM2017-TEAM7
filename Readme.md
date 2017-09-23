@@ -32,3 +32,10 @@ Justin Ryan | justin@jry.se | github.com/carillonator
 Eric Schles | ericschles@gmail.com | github.com/EricSchles
 
 Matthew Ström | matthew.h.strom@gmail.com | matthewstrom.com
+
+
+# Helpful datasets
+
+## PMMR (Preliminary Mayor's Management Report)
+- [FY16](https://data.cityofnewyork.us/City-Government/FY16-PMMR-Agency-Performance-Indicators/q5za-zqz7)
+- [FY17](https://data.cityofnewyork.us/City-Government/FY17-PMMR-Agency-Performance-Indicators/him9-7gri)

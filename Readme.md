@@ -39,3 +39,41 @@ Matthew Ström | matthew.h.strom@gmail.com | matthewstrom.com
 ## PMMR (Preliminary Mayor's Management Report)
 - [FY16](https://data.cityofnewyork.us/City-Government/FY16-PMMR-Agency-Performance-Indicators/q5za-zqz7)
 - [FY17](https://data.cityofnewyork.us/City-Government/FY17-PMMR-Agency-Performance-Indicators/him9-7gri)
+
+Example Query
+```
+# MMR FY - July 1, 2016 through June 30, 2017
+SELECT
+ unique_key,
+ created_date,
+ closed_date,
+ agency,
+ agency_name,
+ complaint_type,
+ descriptor,
+ location_type,
+ incident_zip,
+ incident_address,
+ street_name,
+ school_name,
+ school_code,
+ address_type,
+ city,
+ landmark,
+ facility_type,
+ status,
+ due_date,
+ resolution_description,
+ resolution_action_updated_date,
+ community_board,
+ borough,
+ latitude,
+ longitude,
+ location
+FROM
+ `bigquery-public-data.new_york.311_service_requests`
+WHERE
+ created_date BETWEEN TIMESTAMP("2016-07-01 00:00:00.000")
+ AND TIMESTAMP("2017-07-01 00:00:00.000")
+```
+
